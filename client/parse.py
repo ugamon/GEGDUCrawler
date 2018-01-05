@@ -34,6 +34,7 @@ class ParseThePage(object):
             _active_title = _titles_elements.pop()
             _active_date = _date_elements.pop()
             _active_metro = _metro_elements.pop()
+
             self.__bucket.append({
                 "title": remove_all_symbols(_active_title.text.encode('windows-1251')),
                 "price": remove_all_symbols(_active_price.text.encode('windows-1251')),
@@ -42,7 +43,6 @@ class ParseThePage(object):
 
 
             })
-
 
             self.list_union(_titles_elements, _prices_elements, _date_elements, _metro_elements)
 
