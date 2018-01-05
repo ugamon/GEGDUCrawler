@@ -4,7 +4,7 @@ class Descriptor(object):
     DEFAULT_OPTIONS = {
         "site": r"https://www.avito.ru",
         "router": [
-            r"moskva/audio_i_video",
+            r"moskva/noutbuki",
         ]
     }
 

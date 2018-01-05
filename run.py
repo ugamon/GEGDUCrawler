@@ -5,7 +5,7 @@ import os
 
 if __name__ == '__main__':
     g_bucket = []
-    for url in Descriptor(max_depth=110).get_url():
+    for url in Descriptor(max_depth=150).get_url():
         resp = GetData(url=url,
                        headers={
                            "Content-Type": "text/html;charset=utf-8",
@@ -18,6 +18,6 @@ if __name__ == '__main__':
 
     with open("sample.csv", "a+") as f:
         for i in g_bucket:
-            a, b, c = i.values()
-            f.write(a+';'+b+';'+c+';'+'\n')
+            a, b, c, d = i.values()
+            f.write(a+';'+b+';'+c+';'+d+';'+'\n')
 
