@@ -13,7 +13,7 @@ class Descriptor(object):
 
         if options is None:
             options = {}
-        elif not isinstance(options,dict):
+        elif not isinstance(options, dict):
             print("{message}")
             options = {}
         else:
@@ -26,12 +26,15 @@ class Descriptor(object):
     def get_url(self):
         try:
 
-            if isinstance(self._options["router"],list):
+            if isinstance(self._options["router"], list):
                 if self._options['site'].endswith('/'):
                     base_url = self._options['site']
                 else:
                     base_url = self._options['site']+'/'
-                return [base_url+res for res in self._options["router"]]
+                _temp = [base_url+res for res in self._options["router"]]
+                if len(_temp)>1:
+                    return _temp
+                return _temp.pop()
 
         except KeyError as e:
             raise Exception

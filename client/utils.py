@@ -35,3 +35,9 @@ def remove_all_symbols(string):
         except Exception:
             pass
     return _str
+
+def remove_if_exist(file_path):
+    try:
+        os.remove(file_path)
+    except Exception as e:
+        print(e)
