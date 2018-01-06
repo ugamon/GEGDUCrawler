@@ -1,12 +1,12 @@
 from requests import get
 #from config.routing import getRandomUrl
-from client.utils import writeOutputToFile
+from client.utils import write_output_to_file
 from config import Descriptor
 import random
 from time import sleep
 
-class GetData(object):
-    def __init__(self,url=None,max_retries=3,*args,**kwargs):
+class GetRawData(object):
+    def __init__(self, url=None, max_retries=3, *args, **kwargs):
         self.status = None
         self.headers = None
         self.content = None
@@ -16,19 +16,19 @@ class GetData(object):
             url = Descriptor().get_url()
 
         self.max_retries = max_retries
-        self.__resilent(url,*args,**kwargs)
+        self.get(url, *args, **kwargs)
 
-    @writeOutputToFile
-    def __resilent(self, url, *params, **kwargs):
+    @write_output_to_file
+    def get(self, url, *params, **kwargs):
         while self.max_retries >= 0:
-            _rand = random.randrange(2, 10)
+
             if "max_retries" not in kwargs.keys():
                 self.max_retries -= 1
             try:
-                sleep(_rand)
-                resp = get(url,*params,**kwargs)
+                self.request_chameleon(4)
+                resp = get(url, *params, **kwargs)
             except Exception as e:
-                self.__resilent(url,*params,**kwargs)
+                self.get(url, *params,**kwargs)
             else:
                 self.success = True
                 self.raw = resp.raw
@@ -39,3 +39,10 @@ class GetData(object):
                 print(self.url,self.headers,self.status)
                 return self.content
 
+    def request_chameleon(self, max_seconds=5):
+        if not isinstance(max_seconds,int):
+            self.request_chameleon(max_seconds=3)
+        else:
+            random_seed = random.randrange(0, max_seconds)
+            sleep(random_seed)
+            return True

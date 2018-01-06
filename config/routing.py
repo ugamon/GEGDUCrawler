@@ -23,7 +23,6 @@ class Descriptor(object):
             _bs = self._options["router"][0]
             self._options["router"] = ["{uri}?q={page_num}".format(page_num=page_num, uri=_bs) for page_num in range(1, max_depth)]
 
-
     def get_url(self):
         try:
 

@@ -1,9 +1,9 @@
-from client.core import GetData
-from client.utils import writeOutputToFile
+from client.core import GetRawData
+from client.utils import write_output_to_file
 from client.parse import ParseThePage
 
 __all__ = {
-    "GetData",
-    "writeOutputToFile",
+    "GetRawData",
+    "write_output_to_file",
     "ParseThePage"
 }

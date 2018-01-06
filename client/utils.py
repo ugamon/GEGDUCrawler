@@ -3,12 +3,12 @@ import os
 import re
 from copy import copy
 
-def writeOutputToFile(function):
-    def innerFunction(*args,**kwargs):
+def write_output_to_file(function):
+    def inner_func(*args, **kwargs):
         root = os.path.abspath(os.path.curdir)
         _path = path.join(root, "RESP_{additional_info}".format(additional_info=function.__name__ + ".txt"))
-        with open(_path,'a+') as f:
-            result = function(*args,**kwargs)
+        with open(_path, 'a+') as f:
+            result = function(*args, **kwargs)
             try:
                 if isinstance(result, list):
                     for item in result:
@@ -22,7 +22,7 @@ def writeOutputToFile(function):
                     f.write(result)
             except Exception as e:
                 f.write("Oh snap! ='( %s \n" % e)
-    return innerFunction
+    return inner_func
 
 
 
