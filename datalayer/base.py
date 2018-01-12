@@ -1,4 +1,4 @@
-#encoding=utf-8
+# encoding=utf-8
 
 class ItemModelBase(object):
     def __init__(self,
@@ -11,7 +11,7 @@ class ItemModelBase(object):
                  ):
 
         self.id = None
-        #self.title = None
+        # self.title = None
         self.sdesc = None
         self.price = None
         self.date = None
@@ -41,7 +41,7 @@ class ItemModelBase(object):
     def __str__(self):
         return "Base class for AVITO catalog item"
 
-    def __encode(self, value, cust_encoding="cp1251" ):
+    def __encode(self, value, cust_encoding="cp1251"):
         def internal_encoding(_value):
             _value = value
             try:
@@ -49,15 +49,15 @@ class ItemModelBase(object):
             except Exception as e:
                 return _value
 
-        if isinstance(value,dict):
-            return {internal_encoding(k):internal_encoding(v) for k,v in value.items()}
+        if isinstance(value, dict):
+            return {internal_encoding(k): internal_encoding(v) for k, v in value.items()}
         elif isinstance(value, list):
-            return [internal_encoding(k) for k,v in value]
+            return [internal_encoding(k) for k, v in value]
         else:
             return internal_encoding(value)
 
     def __price_parse(self, value, delimeter):
         if delimeter in value:
             self.price = value.split(delimeter)[0].strip()
-        # else:
-        #     self.price = value
+            # else:
+            #     self.price = value

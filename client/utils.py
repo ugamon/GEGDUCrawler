@@ -24,8 +24,6 @@ def write_output_to_file(function):
                 f.write("Oh snap! ='( %s \n" % e)
     return inner_func
 
-
-
 def remove_all_symbols(string):
     _str = copy(string)
     _exclude = ['\n']
@@ -41,3 +39,5 @@ def remove_if_exist(file_path):
         os.remove(file_path)
     except Exception as e:
         print(e)
+
+

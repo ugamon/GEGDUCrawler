@@ -31,15 +31,17 @@ class GetRawData(object):
         self.__get(url, *args, **kwargs)
 
     def __get(self, url, *params, **kwargs):
+        print(url)
         while self.max_retries >= 0:
 
             if "max_retries" not in kwargs.keys():
                 self.max_retries -= 1
             try:
-                self.request_chameleon(self._interval)
-                resp = get(url, *params, timeout=10, **kwargs)
+                self.request_chameleon(self._interval, 3)
+                resp = get(url, *params, **kwargs)
             except Exception as e:
-                self.__get(url, *params, timeout=10, **kwargs)
+                print(e)
+                self.__get(url, *params, **kwargs)
             else:
                 self.success = True
                 self.raw = resp.raw
@@ -50,10 +52,10 @@ class GetRawData(object):
                 print(self.url,self.headers,self.status)
                 return self.content
 
-    def request_chameleon(self, max_seconds):
+    def request_chameleon(self, max_seconds, min_seconds=0):
         if not isinstance(max_seconds, int):
             self.request_chameleon(max_seconds=3)
         else:
-            random_seed = random.randrange(1, max_seconds)
+            random_seed = random.randrange(min_seconds, max_seconds)
             sleep(random_seed)
             return True
